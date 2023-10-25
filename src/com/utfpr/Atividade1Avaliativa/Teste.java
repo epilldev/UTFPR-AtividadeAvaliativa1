@@ -1,48 +1,65 @@
 package com.utfpr.Atividade1Avaliativa;
 
+import java.text.DecimalFormat;
+import java.util.List;
+
 public class Teste {
 
 	public static void main(String[] args) {
 
-		Veiculo veiculo1 = new Veiculo();
-		veiculo1.setPlaca("ABC123");
-		veiculo1.setMarca("Toyota");
-		veiculo1.setModelo("Corolla");
-		veiculo1.setCor("Verde");
-		veiculo1.setVelocMax(180.0f);
-		veiculo1.setQtdRodas(4);
-		veiculo1.getMotor().setQtdPist(4);
-		veiculo1.getMotor().setPotencia(150);
+		List<Carga> veiculos = List.of(new Carga("ABC123", "Ford", "ModeloX", "Vermelho", 80, 6, 8, 250, 1000, 500),
+				new Carga("XYZ456", "Chevrolet", "ModeloY", "Azul", 70, 8, 10, 300, 1200, 600),
+				new Carga("DEF789", "Toyota", "ModeloZ", "Verde", 90, 6, 8, 220, 800, 400),
+				new Carga("GHI101", "Nissan", "ModeloA", "Prata", 75, 10, 12, 350, 1500, 700),
+				new Carga("JKL111", "Volkswagen", "ModeloB", "Preto", 85, 8, 10, 280, 1100, 550));
 
-		Veiculo veiculo2 = new Veiculo("XYZ789", "Honda", "Civic", "Vermelho", 170.0f, 4);
+		List<Passeio> veiculosPasseio = List.of(new Passeio("ABC001", "Honda", "Civic", "Azul", 150.5f, 4, 4, 160, 5),
+				new Passeio("XYZ002", "Toyota", "Corolla", "Prata", 140.2f, 4, 4, 150, 5),
+				new Passeio("DEF003", "Volkswagen", "Golf", "Branco", 155.0f, 4, 4, 170, 5),
+				new Passeio("GHI004", "Ford", "Focus", "Preto", 135.8f, 4, 4, 130, 5),
+				new Passeio("JKL005", "Chevrolet", "Cruze", "Vermelho", 145.7f, 4, 4, 140, 5));
 
-		Veiculo veiculo3 = new Veiculo("ABC123", "Toyota", "Corolla", "Azul", 180.0f, 4, 4, 150);
-
-		System.out.println("Veiculo 1:");
-		System.out.println(veiculo1.toString());
-
-		System.out.println("************************************************************");
-		System.out.println("Veiculo 2");
-		System.out.println("Placa: " + veiculo2.getPlaca());
-		System.out.println("Marca: " + veiculo2.getMarca());
-		System.out.println("Modelo: " + veiculo2.getModelo());
-		System.out.println("Cor: " + veiculo2.getCor());
-		System.out.println("Quantidade de rodas: " + veiculo2.getQtdRodas());
-		System.out.println("Velocidade Máxima: " + veiculo2.getVelocMax());
-		System.out.println("Quantidade de Pistão: " + veiculo2.getMotor().getQtdPist());
-		System.out.println("Potência: " + veiculo2.getMotor().getPotencia());
-
-		System.out.println("************************************************************");
-		System.out.println("Veiculo 3");
-		System.out.println("Placa: " + veiculo3.getPlaca());
-		System.out.println("Marca: " + veiculo3.getMarca());
-		System.out.println("Modelo: " + veiculo3.getModelo());
-		System.out.println("Cor: " + veiculo3.getCor());
-		System.out.println("Quantidade de rodas: " + veiculo3.getQtdRodas());
-		System.out.println("Velocidade Máxima: " + veiculo3.getVelocMax());
-		System.out.println("Quantidade de Pistão: " + veiculo3.getMotor().getQtdPist());
-		System.out.println("Potência: " + veiculo3.getMotor().getPotencia());
+		imprimirCarga(veiculos, 0);
+		imprimirInformacoes(veiculosPasseio, 0);
 
 	}
 
+	public static void imprimirCarga(List<Carga> veiculos, int index) {
+
+		DecimalFormat df = new DecimalFormat("0.000");
+		if (index < veiculos.size()) {
+			Carga veiculo = veiculos.get(index);
+
+			System.out.println("************************************************************");
+			System.out.println("Veiculo Carga " + (index + 1));
+			System.out.println("Marca: " + veiculo.getMarca());
+			System.out.println("Modelo: " + veiculo.getModelo());
+			System.out.println("Placa: " + veiculo.getPlaca());
+			System.out.println("Velocidade Máxima: " + df.format(veiculo.calcVel(veiculo.getVelocMax())));
+			System.out.println("Quantidade de Pistão: " + veiculo.getMotor().getQtdPist());
+			System.out.println("Potência: " + veiculo.getMotor().getPotencia());
+			System.out.println("Tara: " + veiculo.getTara());
+
+			imprimirCarga(veiculos, index + 1);
+		}
+	}
+
+	public static void imprimirInformacoes(List<Passeio> veiculos, int index) {
+		DecimalFormat df = new DecimalFormat("0.000");
+		if (index < veiculos.size()) {
+			Passeio veiculo = veiculos.get(index);
+
+			System.out.println("************************************************************");
+			System.out.println("Veiculo Passeio " + (index + 1));
+			System.out.println("Marca: " + veiculo.getMarca());
+			System.out.println("Modelo: " + veiculo.getModelo());
+			System.out.println("Placa: " + veiculo.getPlaca());
+			System.out.println("Velocidade Máxima: " + df.format(veiculo.calcVel(veiculo.getVelocMax())));
+			System.out.println("Quantidade de Passageiros: " + veiculo.getQtdePassageiros());
+			System.out.println("Potência: " + veiculo.getMotor().getPotencia());
+			System.out.println("Quantidade de Pistões: " + veiculo.getMotor().getQtdPist());
+
+			imprimirInformacoes(veiculos, index + 1); // Chamada recursiva para o próximo veículo
+		}
+	}
 }

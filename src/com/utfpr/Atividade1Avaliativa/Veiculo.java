@@ -1,6 +1,6 @@
 package com.utfpr.Atividade1Avaliativa;
 
-public class Veiculo {
+public abstract class Veiculo {
 
 	String placa;
 	String marca;
@@ -44,6 +44,8 @@ public class Veiculo {
 		this.qtdRodas = 0;
 		motor = new Motor();
 	}
+	
+	public abstract float calcVel(float velocMax);
 
 	public String getPlaca() {
 		return placa;
